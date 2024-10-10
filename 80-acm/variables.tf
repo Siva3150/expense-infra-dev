@@ -14,12 +14,11 @@ variable "common_tags" {
     }
 }
 
-variable "backend_tags" {
-    default = {
-        Component = "backend"
-    }
-}
 
 variable "zone_name" {
     default = "sivadevops.fun"
+}
+
+variable "zone_id" {
+    default = "Z06930922N9BU7VR1YEID"
 }
