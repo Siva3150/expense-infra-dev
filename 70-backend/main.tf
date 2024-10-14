@@ -150,6 +150,18 @@ vpc_zone_identifier       = [local.private_subnet_id]
   }
 }
 
+resource "aws_autoscaling_policy" "example" {
+  name = local.resource_name
+  policy_type            = "TargetTrackingScaling"
+  autoscaling_group_name  = aws_autoscaling_group.backend.name
+  target_tracking_configuration {
+    predefined_metric_specification {
+      predefined_metric_type = "ASGAverageCPUUtilization"
+    }
+
+    target_value = 70.0
+  }
+}
 resource "aws_lb_listener_rule" "backend" {
   listener_arn = local.app_alb_listener_arn
   priority     = 100 # low priority will be evaluated first
